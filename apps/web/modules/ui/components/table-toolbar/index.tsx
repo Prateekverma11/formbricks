@@ -44,7 +44,7 @@ const ToolbarSearch = ({
   }, [text]);
 
   return (
-    <div className="flex h-8 w-44 items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 focus-within:ring-1 focus-within:ring-slate-400 sm:w-56">
+    <div className="flex h-8 min-w-36 grow items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2 focus-within:ring-1 focus-within:ring-slate-400 sm:w-56 sm:grow-0">
       <SearchIcon className="size-4 shrink-0 text-slate-400" aria-hidden="true" />
       <input
         type="search"
@@ -174,11 +174,11 @@ export const TableToolbar = ({
 
   return (
     <div ref={rootRef} className={cn("flex flex-col gap-2", className)}>
-      <div className="flex min-h-8 items-center justify-between gap-3">
+      <div className="flex min-h-8 flex-wrap items-center justify-between gap-3">
         {selectionContent ? (
-          <div className="flex min-w-0 items-center">{selectionContent}</div>
+          <div className="flex min-w-0 flex-1 flex-wrap items-center">{selectionContent}</div>
         ) : (
-          <div className="flex min-w-0 items-center gap-2">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
             {settings && <TableSettingsPopover {...settings} />}
             {search && <ToolbarSearch {...search} />}
             {filter && (hasQuickProperties || hasRuleProperties) && (
