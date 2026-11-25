@@ -254,6 +254,7 @@ export const SummaryPage = ({
         survey={surveyMemoized}
         filterState={filterState}
         matchCount={isLoading ? null : surveySummary.meta.totalResponses}
+        className="my-4"
       />
       <ScrollToTop containerId="mainContent" />
       <SummaryList
