@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { ZBaseStyling, ZLogo, ZSurveyStylingBackground } from "./styling";
+import { type TScrollbarWidth, ZBaseStyling, ZLogo, ZSurveyStylingBackground } from "./styling";
 import {
   isSafeThemeBackground,
   isSafeThemeBoxShadow,
@@ -199,6 +199,7 @@ describe("sanitizeThemeStyling", () => {
       inputPlaceholderOpacity: Number.NaN,
       brandColor: { light: "red;x:y", dark: "#000" },
       cardBackgroundColor: { light: "#fff", dark: "#000;x:y" },
+      scrollbarWidth: "super-wide;x:y" as unknown as TScrollbarWidth,
       logo: { url: "https://example.com/logo.png", bgColor: "#fff;x:y" },
       background: { bg: "red;x:y", bgType: "color" as const, brightness: 100 },
     });
@@ -209,6 +210,7 @@ describe("sanitizeThemeStyling", () => {
     expect(sanitized.inputPlaceholderOpacity).toBeUndefined();
     expect(sanitized.brandColor).toBeUndefined();
     expect(sanitized.cardBackgroundColor).toEqual({ light: "#fff", dark: null });
+    expect(sanitized.scrollbarWidth).toBeUndefined();
     expect(sanitized.logo).toEqual({ url: "https://example.com/logo.png", bgColor: undefined });
     expect(sanitized.background).toEqual({ bg: undefined, bgType: "color", brightness: 100 });
     // Untouched where valid.
@@ -235,6 +237,7 @@ const DEFAULT_STYLING = {
   roundness: 8,
   cardArrangement: { linkSurveys: "cardless" as const, appSurveys: "simple" as const },
   linkSurveyCardWidth: "default" as const,
+  scrollbarWidth: "thin" as const,
   elementHeadlineColor: { light: "#0f172a" },
   elementHeadlineFontSize: 16,
   elementHeadlineFontWeight: 500,

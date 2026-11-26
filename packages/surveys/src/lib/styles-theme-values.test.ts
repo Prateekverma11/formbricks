@@ -89,4 +89,18 @@ describe("theme values in generated CSS", () => {
     expect(css).not.toContain("x:y");
     expect(css).toMatch(/--fb-survey-background-color: #[0-9a-f]{6};/);
   });
+
+  test("renders scrollbarWidth configuration correctly", () => {
+    const autoCss = render({ scrollbarWidth: "auto" });
+    expect(autoCss).toContain("--fb-scrollbar-style: auto;");
+    expect(autoCss).toContain("--fb-scrollbar-width: 12px;");
+
+    const thinCss = render({ scrollbarWidth: "thin" });
+    expect(thinCss).toContain("--fb-scrollbar-style: thin;");
+    expect(thinCss).toContain("--fb-scrollbar-width: 6px;");
+
+    const noneCss = render({ scrollbarWidth: "none" });
+    expect(noneCss).toContain("--fb-scrollbar-style: none;");
+    expect(noneCss).toContain("--fb-scrollbar-width: 0px;");
+  });
 });

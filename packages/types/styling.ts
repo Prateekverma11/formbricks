@@ -21,6 +21,9 @@ export const ZCardArrangement = z.object({
 export const ZLinkSurveyCardWidthOptions = z.enum(["narrow", "default", "wide"]);
 export type TLinkSurveyCardWidthOptions = z.infer<typeof ZLinkSurveyCardWidthOptions>;
 
+export const ZScrollbarWidth = z.enum(["thin", "auto", "none"]);
+export type TScrollbarWidth = z.infer<typeof ZScrollbarWidth>;
+
 export const LINK_SURVEY_CARD_WIDTH_MAX: Record<TLinkSurveyCardWidthOptions, string> = {
   narrow: "clamp(17.5rem, 88vw, 30rem)",
   default: "clamp(20rem, 92vw, 40rem)",
@@ -128,6 +131,7 @@ export const ZBaseStyling = z.object({
   roundness: z.union([z.number(), z.string()]).nullish(),
   cardArrangement: ZCardArrangement.nullish(),
   linkSurveyCardWidth: ZLinkSurveyCardWidthOptions.nullish(),
+  scrollbarWidth: ZScrollbarWidth.nullish(),
   background: ZSurveyStylingBackground.nullish(),
   hideProgressBar: z.boolean().nullish(),
   isLogoHidden: z.boolean().nullish(),
