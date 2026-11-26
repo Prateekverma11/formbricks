@@ -453,6 +453,7 @@ export const sanitizeThemeStyling = <T extends TThemeStylingInput>(styling: T): 
   dropUnless("inputShadow", isSafeThemeBoxShadow);
   dropUnless("fontFamily", isSafeThemeFontFamily);
   dropUnless("inputPlaceholderOpacity", (value) => isFiniteNumber(value) && value >= 0 && value <= 1);
+  dropUnless("scrollbarWidth", (value) => value === "thin" || value === "auto" || value === "none");
 
   const logo = result.logo as { bgColor?: unknown } | null | undefined;
   if (logo?.bgColor !== undefined && !isSafeThemeColor(logo.bgColor)) {

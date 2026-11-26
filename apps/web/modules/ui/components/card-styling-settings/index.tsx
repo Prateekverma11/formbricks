@@ -14,6 +14,7 @@ import { CardArrangementTabs } from "@/modules/ui/components/card-arrangement-ta
 import { CardWidthTabs } from "@/modules/ui/components/card-width-tabs";
 import { ColorPicker } from "@/modules/ui/components/color-picker";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/modules/ui/components/form";
+import { ScrollbarWidthTabs } from "@/modules/ui/components/scrollbar-width-tabs";
 import { useStylingAppearance } from "@/modules/ui/components/styling-appearance";
 import { ColorField, DimensionInput } from "@/modules/ui/components/styling-fields";
 import { Switch } from "@/modules/ui/components/switch";
@@ -43,6 +44,7 @@ export const CardStylingSettings = ({
   const linkCardArrangement = form.watch("cardArrangement.linkSurveys") ?? "straight";
   const appCardArrangement = form.watch("cardArrangement.appSurveys") ?? "straight";
   const linkSurveyCardWidth = form.watch("linkSurveyCardWidth") ?? "default";
+  const scrollbarWidth = form.watch("scrollbarWidth") ?? "thin";
   const hideProgressBar = form.watch("hideProgressBar");
 
   return (
@@ -165,6 +167,30 @@ export const CardStylingSettings = ({
               )}
             />
           )}
+
+          <FormField
+            control={form.control}
+            name="scrollbarWidth"
+            render={() => (
+              <FormItem className="col-span-2">
+                <div>
+                  <FormLabel>{t("workspace.surveys.edit.scrollbar_width")}</FormLabel>
+                  <FormDescription className="text-xs">
+                    {t("workspace.surveys.edit.scrollbar_width_description")}
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <ScrollbarWidthTabs
+                    activeScrollbarWidth={scrollbarWidth}
+                    setActiveScrollbarWidth={(value) => {
+                      form.setValue("scrollbarWidth", value);
+                    }}
+                    disabled={disabled}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
 
         {/* Highlight Border Section */}

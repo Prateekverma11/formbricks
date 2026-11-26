@@ -111,6 +111,7 @@ export const STYLE_DEFAULTS: TWorkspaceStyling = {
   // Link surveys default to the cardless layout; "cardless" is link-only, so app surveys keep "simple".
   cardArrangement: { linkSurveys: "cardless", appSurveys: "simple" },
   linkSurveyCardWidth: "default",
+  scrollbarWidth: "thin",
 
   // Headlines & Descriptions
   elementHeadlineColor: { light: _colors["elementHeadlineColor.light"] },

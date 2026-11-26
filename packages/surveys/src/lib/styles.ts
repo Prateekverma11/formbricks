@@ -6,6 +6,7 @@ import {
   getDarkReadableColors,
   resolveDarkColors,
 } from "@formbricks/types/dark-palette";
+import { type TScrollbarWidth } from "@formbricks/types/styling";
 import { sanitizeThemeStyling } from "@formbricks/types/styling-values";
 import { type TSurveyStyling } from "@formbricks/types/surveys/types";
 import { type TWorkspaceStyling } from "@formbricks/types/workspace";
@@ -207,6 +208,21 @@ export const getDarkThemeCss = (rawStyling: TWorkspaceStyling | TSurveyStyling):
   css += getDarkReadableTokens(dark);
 
   return `${css}}\n`;
+};
+
+const SCROLLBAR_WIDTH_MAP: Record<TScrollbarWidth, string> = {
+  auto: "12px",
+  none: "0px",
+  thin: "6px",
+};
+
+const appendScrollbarVariables = (
+  append: (name: string, value?: string | null) => void,
+  scrollbarWidth?: TScrollbarWidth | null
+): void => {
+  if (!scrollbarWidth) return;
+  append("scrollbar-style", scrollbarWidth);
+  append("scrollbar-width", SCROLLBAR_WIDTH_MAP[scrollbarWidth]);
 };
 
 export const addCustomThemeToDom = ({
@@ -454,6 +470,8 @@ export const addCustomThemeToDom = ({
 
   appendCssVariable("progress-track-bg-color", styling.progressTrackBgColor?.light);
   appendCssVariable("progress-indicator-bg-color", styling.progressIndicatorBgColor?.light);
+
+  appendScrollbarVariables(appendCssVariable, styling.scrollbarWidth);
 
   // Close the #fbjs variable block
   cssVariables += "}\n";
